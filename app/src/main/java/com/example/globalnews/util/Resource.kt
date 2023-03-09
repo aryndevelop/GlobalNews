@@ -1,7 +1,7 @@
 package com.example.globalnews.util
 
 sealed class Resource<T>(
-    val dat: T? = null,
+    val data: T? = null,
     val message: String? = null
 ) {
 
