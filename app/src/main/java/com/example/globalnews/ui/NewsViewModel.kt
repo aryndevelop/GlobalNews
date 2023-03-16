@@ -3,9 +3,11 @@ package com.example.globalnews.ui
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.globalnews.models.Article
 import com.example.globalnews.models.NewsResponse
 import com.example.globalnews.respository.NewsRepository
 import com.example.globalnews.util.Resource
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
@@ -51,5 +53,15 @@ class NewsViewModel (
             }
         }
         return Resource.Error(response.message())
+    }
+
+    fun saveArticle(article: Article) = viewModelScope.launch(Dispatchers.IO) {
+        newsRepository.upsert(article)
+    }
+
+    fun getSavedNews() = newsRepository.getSavedNews()
+
+    fun deleteArticle(article: Article) = viewModelScope.launch(Dispatchers.IO) {
+        newsRepository.deleteArticle(article)
     }
 }
