@@ -30,7 +30,7 @@ class NewsActivity : AppCompatActivity() {
             findViewById<BottomNavigationView>(R.id.bottomNavigationView).setupWithNavController(navController)
 
             val newsRepository = NewsRepository(ArticleDatabase(this@NewsActivity))
-            val viewModelProviderFactory = NewsViewModelProviderFactory(newsRepository)
+            val viewModelProviderFactory = NewsViewModelProviderFactory(application, newsRepository)
             viewModel = ViewModelProvider(this@NewsActivity, viewModelProviderFactory).get(NewsViewModel::class.java)
 
         }
